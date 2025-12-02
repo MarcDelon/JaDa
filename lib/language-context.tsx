@@ -1,0 +1,216 @@
+"use client"
+
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+
+type Language = 'fr' | 'en'
+
+interface LanguageContextType {
+  language: Language
+  setLanguage: (lang: Language) => void
+  t: (key: string) => string
+}
+
+const translations = {
+  fr: {
+    // Navigation
+    'nav.home': 'Accueil',
+    'nav.collections': 'Collections',
+    'nav.women': 'Femme',
+    'nav.children': 'Enfant',
+    'nav.sale': 'Soldes',
+    'nav.newArrivals': 'Nouveautés',
+    'nav.clothing': 'Vêtements',
+    'nav.shoes': 'Chaussures',
+    'nav.accessories': 'Accessoires',
+    'nav.kids': 'Enfant (2-14 ans)',
+    'nav.baby': 'Bébé (0-36 mois)',
+    'nav.teens': 'Ado (12-18 ans)',
+    'nav.about': 'À propos',
+    'nav.contact': 'Contact',
+    'nav.account': 'Mon compte',
+    'nav.cart': 'Panier',
+    'nav.wishlist': 'Favoris',
+    'nav.login': 'Se connecter',
+    'nav.logout': 'Se déconnecter',
+    
+    // Common
+    'common.currency': 'FCFA',
+    'common.loading': 'Chargement...',
+    'common.addToCart': 'Ajouter au panier',
+    'common.addToWishlist': 'Ajouter aux favoris',
+    'common.viewDetails': 'Voir les détails',
+    'common.continueShopping': 'Continuer vos achats',
+    'common.checkout': 'Passer commande',
+    'common.total': 'Total',
+    'common.subtotal': 'Sous-total',
+    'common.quantity': 'Quantité',
+    'common.price': 'Prix',
+    'common.remove': 'Retirer',
+    
+    // Home
+    'home.hero.title': 'Nouvelle Collection',
+    'home.hero.subtitle': 'Découvrez les dernières tendances',
+    'home.featured': 'Produits en vedette',
+    'home.newArrivals': 'Nouveautés',
+    
+    // Account
+    'account.title': 'Mon compte',
+    'account.profile': 'Profil',
+    'account.orders': 'Mes commandes',
+    'account.addresses': 'Mes adresses',
+    'account.settings': 'Paramètres',
+    'account.noOrders': "Vous n'avez pas encore passé de commande",
+    'account.noAddresses': "Vous n'avez pas encore d'adresse enregistrée",
+    'account.orderNumber': 'Commande n°',
+    'account.status': 'Statut',
+    'account.delivered': 'Livré',
+    'account.processing': 'En préparation',
+    'account.pending': 'En attente',
+    
+    // Auth
+    'auth.login': 'Se connecter',
+    'auth.register': "S'inscrire",
+    'auth.email': 'Adresse e-mail',
+    'auth.password': 'Mot de passe',
+    'auth.confirmPassword': 'Confirmer le mot de passe',
+    'auth.firstName': 'Prénom',
+    'auth.lastName': 'Nom',
+    'auth.forgotPassword': 'Mot de passe oublié ?',
+    'auth.noAccount': "Pas encore de compte ?",
+    'auth.hasAccount': 'Vous avez déjà un compte ?',
+    'auth.loginWithGoogle': 'Se connecter avec Google',
+    
+    // Cart
+    'cart.title': 'Panier',
+    'cart.empty': 'Votre panier est vide',
+    'cart.itemsCount': 'articles',
+    
+    // Wishlist
+    'wishlist.title': 'Mes favoris',
+    'wishlist.empty': 'Votre liste de favoris est vide',
+    
+    // Products
+    'products.noProducts': 'Aucun produit disponible',
+    'products.newArrivals': 'Nouveautés',
+    'products.onSale': 'En solde',
+  },
+  en: {
+    // Navigation
+    'nav.home': 'Home',
+    'nav.collections': 'Collections',
+    'nav.women': 'Women',
+    'nav.children': 'Children',
+    'nav.sale': 'Sale',
+    'nav.newArrivals': 'New Arrivals',
+    'nav.clothing': 'Clothing',
+    'nav.shoes': 'Shoes',
+    'nav.accessories': 'Accessories',
+    'nav.kids': 'Kids (2-14 years)',
+    'nav.baby': 'Baby (0-36 months)',
+    'nav.teens': 'Teens (12-18 years)',
+    'nav.about': 'About',
+    'nav.contact': 'Contact',
+    'nav.account': 'My Account',
+    'nav.cart': 'Cart',
+    'nav.wishlist': 'Wishlist',
+    'nav.login': 'Login',
+    'nav.logout': 'Logout',
+    
+    // Common
+    'common.currency': 'FCFA',
+    'common.loading': 'Loading...',
+    'common.addToCart': 'Add to Cart',
+    'common.addToWishlist': 'Add to Wishlist',
+    'common.viewDetails': 'View Details',
+    'common.continueShopping': 'Continue Shopping',
+    'common.checkout': 'Checkout',
+    'common.total': 'Total',
+    'common.subtotal': 'Subtotal',
+    'common.quantity': 'Quantity',
+    'common.price': 'Price',
+    'common.remove': 'Remove',
+    
+    // Home
+    'home.hero.title': 'New Collection',
+    'home.hero.subtitle': 'Discover the latest trends',
+    'home.featured': 'Featured Products',
+    'home.newArrivals': 'New Arrivals',
+    
+    // Account
+    'account.title': 'My Account',
+    'account.profile': 'Profile',
+    'account.orders': 'My Orders',
+    'account.addresses': 'My Addresses',
+    'account.settings': 'Settings',
+    'account.noOrders': 'You have no orders yet',
+    'account.noAddresses': 'You have no saved addresses yet',
+    'account.orderNumber': 'Order #',
+    'account.status': 'Status',
+    'account.delivered': 'Delivered',
+    'account.processing': 'Processing',
+    'account.pending': 'Pending',
+    
+    // Auth
+    'auth.login': 'Login',
+    'auth.register': 'Register',
+    'auth.email': 'Email Address',
+    'auth.password': 'Password',
+    'auth.confirmPassword': 'Confirm Password',
+    'auth.firstName': 'First Name',
+    'auth.lastName': 'Last Name',
+    'auth.forgotPassword': 'Forgot Password?',
+    'auth.noAccount': "Don't have an account?",
+    'auth.hasAccount': 'Already have an account?',
+    'auth.loginWithGoogle': 'Login with Google',
+    
+    // Cart
+    'cart.title': 'Shopping Cart',
+    'cart.empty': 'Your cart is empty',
+    'cart.itemsCount': 'items',
+    
+    // Wishlist
+    'wishlist.title': 'My Wishlist',
+    'wishlist.empty': 'Your wishlist is empty',
+    
+    // Products
+    'products.noProducts': 'No products available',
+    'products.newArrivals': 'New Arrivals',
+    'products.onSale': 'On Sale',
+  }
+}
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguageState] = useState<Language>('fr')
+
+  useEffect(() => {
+    const saved = localStorage.getItem('language') as Language
+    if (saved && (saved === 'fr' || saved === 'en')) {
+      setLanguageState(saved)
+    }
+  }, [])
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang)
+    localStorage.setItem('language', lang)
+  }
+
+  const t = (key: string): string => {
+    return translations[language][key as keyof typeof translations['fr']] || key
+  }
+
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+      {children}
+    </LanguageContext.Provider>
+  )
+}
+
+export function useLanguage() {
+  const context = useContext(LanguageContext)
+  if (!context) {
+    throw new Error('useLanguage must be used within LanguageProvider')
+  }
+  return context
+}
