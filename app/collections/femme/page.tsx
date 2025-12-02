@@ -6,8 +6,11 @@ import Footer from "@/components/footer"
 import { Heart, Filter } from "lucide-react"
 import Link from "next/link"
 import { supabase } from "@/lib/supabaseClient"
+import { useLanguage } from "@/lib/language-context"
+import { formatPrice } from "@/lib/currency"
 
 export default function FemmeCollectionPage() {
+  const { t } = useLanguage()
   const [womenProducts, setWomenProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [sortBy, setSortBy] = useState("newest")
@@ -33,7 +36,7 @@ export default function FemmeCollectionPage() {
       const formattedProducts = data.map(product => ({
         id: product.id,
         name: product.name,
-        price: `${product.price.toFixed(2).replace('.', ',')} €`,
+        price: product.price,
         image: product.image_url || product.image || `/placeholder-product-${product.id}.jpg`,
         category: product.category,
         color: product.color || 'Non spécifié',
@@ -80,31 +83,31 @@ export default function FemmeCollectionPage() {
             href="/collections/femme/new"
             className="p-4 border border-border hover:bg-secondary transition text-center font-medium"
           >
-            Nouveautés
+            {t('nav.newArrivals')}
           </Link>
           <Link
             href="/collections/femme/clothing"
             className="p-4 border border-border hover:bg-secondary transition text-center font-medium"
           >
-            Vêtements
+            {t('nav.clothing')}
           </Link>
           <Link
             href="/collections/femme/shoes"
             className="p-4 border border-border hover:bg-secondary transition text-center font-medium"
           >
-            Chaussures
+            {t('nav.shoes')}
           </Link>
           <Link
             href="/collections/femme/accessories"
             className="p-4 border border-border hover:bg-secondary transition text-center font-medium"
           >
-            Accessoires
+            {t('nav.accessories')}
           </Link>
           <Link
             href="/collections/femme/sale"
             className="p-4 border border-accent bg-accent text-accent-foreground hover:opacity-90 transition text-center font-bold"
           >
-            Soldes
+            {t('nav.sale')}
           </Link>
         </div>
 
@@ -115,7 +118,7 @@ export default function FemmeCollectionPage() {
             className="md:hidden flex items-center gap-2 mb-4 text-sm font-medium"
           >
             <Filter size={18} />
-            Filtres
+            {t('collections.filters')}
           </button>
 
           {/* Sidebar Filters */}
@@ -170,27 +173,27 @@ export default function FemmeCollectionPage() {
           <div className="flex-1">
             {/* Sort Options */}
             <div className="mb-8 flex justify-between items-center flex-wrap gap-4">
-              <div className="text-sm text-muted-foreground">{sorted.length} articles</div>
+              <div className="text-sm text-muted-foreground">{sorted.length} {t('collections.itemsAvailable')}</div>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 className="text-sm border border-border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent"
               >
-                <option value="newest">Nouveautés</option>
-                <option value="price-asc">Prix: bas à haut</option>
-                <option value="price-desc">Prix: haut à bas</option>
+                <option value="newest">{t('collections.newest')}</option>
+                <option value="price-asc">{t('collections.priceAsc')}</option>
+                <option value="price-desc">{t('collections.priceDesc')}</option>
               </select>
             </div>
 
             {/* Products Grid */}
             {loading ? (
               <div className="text-center py-20">
-                <p className="text-lg text-muted-foreground">Chargement des produits...</p>
+                <p className="text-lg text-muted-foreground">{t('common.loading')}</p>
               </div>
             ) : sorted.length === 0 ? (
               <div className="text-center py-20">
-                <p className="text-2xl font-semibold mb-2">Aucun produit disponible</p>
-                <p className="text-muted-foreground">Aucun produit femme disponible pour le moment</p>
+                <p className="text-2xl font-semibold mb-2">{t('products.noProducts')}</p>
+                <p className="text-muted-foreground">{t('products.noProducts')}</p>
               </div>
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -225,7 +228,7 @@ export default function FemmeCollectionPage() {
                   </div>
 
                   <h3 className="text-sm font-medium text-foreground line-clamp-2">{product.name}</h3>
-                  <p className="text-sm font-semibold text-foreground mt-2">{product.price}</p>
+                  <p className="text-sm font-semibold text-foreground mt-2">{formatPrice(product.price)}</p>
                 </Link>
               ))}
             </div>
