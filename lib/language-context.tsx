@@ -109,9 +109,10 @@ const translations = {
     
     // Newsletter
     'newsletter.title': 'Restez informé',
-    'newsletter.subtitle': 'Inscrivez-vous à notre newsletter pour recevoir nos dernières offres',
+    'newsletter.subtitle': 'Inscrivez-vous à notre newsletter pour recevoir les dernières tendances et nos offres exclusives',
     'newsletter.email': 'Votre adresse e-mail',
     'newsletter.subscribe': "S'inscrire",
+    'newsletter.success': 'Merci ! Vérifiez votre boîte mail.',
     
     // Footer
     'footer.shop': 'Boutique',
@@ -125,6 +126,30 @@ const translations = {
     'footer.privacy': 'Politique de confidentialité',
     'footer.follow': 'Suivez-nous',
     'footer.copyright': '© 2024 JaDa. Tous droits réservés.',
+    
+    // Arrivals
+    'arrivals.item1.title': 'Nouvelle Collection Automne',
+    'arrivals.item1.description': 'Les pièces incontournables de la saison',
+    'arrivals.item2.title': 'Accessoires Essentiels',
+    'arrivals.item2.description': 'Complétez votre look avec style',
+    'arrivals.trending': 'TENDANCE',
+    'arrivals.accessories': 'ACCESSOIRES',
+    'arrivals.discover': 'Découvrir',
+    
+    // Collections Pages
+    'collections.women.title': 'Collection Femme',
+    'collections.women.description': 'Élégance et style pour toutes les occasions',
+    'collections.children.title': 'Collection Enfant',
+    'collections.children.description': 'Mode confortable et tendance pour les enfants',
+    'collections.sale.title': 'Soldes',
+    'collections.sale.description': 'Profitez de nos meilleures offres',
+    'collections.sortBy': 'Trier par',
+    'collections.newest': 'Plus récent',
+    'collections.priceAsc': 'Prix croissant',
+    'collections.priceDesc': 'Prix décroissant',
+    'collections.filters': 'Filtres',
+    'collections.showFilters': 'Afficher les filtres',
+    'collections.hideFilters': 'Masquer les filtres',
   },
   en: {
     // Navigation
@@ -224,9 +249,10 @@ const translations = {
     
     // Newsletter
     'newsletter.title': 'Stay Informed',
-    'newsletter.subtitle': 'Subscribe to our newsletter to receive our latest offers',
+    'newsletter.subtitle': 'Subscribe to our newsletter to receive the latest trends and our exclusive offers',
     'newsletter.email': 'Your email address',
     'newsletter.subscribe': 'Subscribe',
+    'newsletter.success': 'Thank you! Check your mailbox.',
     
     // Footer
     'footer.shop': 'Shop',
@@ -240,6 +266,30 @@ const translations = {
     'footer.privacy': 'Privacy Policy',
     'footer.follow': 'Follow Us',
     'footer.copyright': '© 2024 JaDa. All rights reserved.',
+    
+    // Arrivals
+    'arrivals.item1.title': 'New Autumn Collection',
+    'arrivals.item1.description': 'The must-have pieces of the season',
+    'arrivals.item2.title': 'Essential Accessories',
+    'arrivals.item2.description': 'Complete your look with style',
+    'arrivals.trending': 'TRENDING',
+    'arrivals.accessories': 'ACCESSORIES',
+    'arrivals.discover': 'Discover',
+    
+    // Collections Pages
+    'collections.women.title': "Women's Collection",
+    'collections.women.description': 'Elegance and style for all occasions',
+    'collections.children.title': "Children's Collection",
+    'collections.children.description': 'Comfortable and trendy fashion for kids',
+    'collections.sale.title': 'Sale',
+    'collections.sale.description': 'Enjoy our best offers',
+    'collections.sortBy': 'Sort by',
+    'collections.newest': 'Newest',
+    'collections.priceAsc': 'Price: Low to High',
+    'collections.priceDesc': 'Price: High to Low',
+    'collections.filters': 'Filters',
+    'collections.showFilters': 'Show Filters',
+    'collections.hideFilters': 'Hide Filters',
   }
 }
 

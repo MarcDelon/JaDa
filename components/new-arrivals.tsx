@@ -1,26 +1,28 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-
-const arrivals = [
-  {
-    id: 1,
-    title: 'Nouvelle Collection Automne',
-    description: 'Les pièces incontournables de la saison',
-    image: '/fashion-autumn-collection-designer.jpg',
-    badge: 'TENDANCE',
-  },
-  {
-    id: 2,
-    title: 'Accessoires Essentiels',
-    description: 'Complétez votre look avec style',
-    image: '/fashion-accessories-bags-shoes.jpg',
-    badge: 'ACCESSOIRES',
-  },
-]
+import { useLanguage } from '@/lib/language-context'
 
 export default function NewArrivals() {
+  const { t, language } = useLanguage()
   const [inView, setInView] = useState<number[]>([])
+  
+  const arrivals = [
+    {
+      id: 1,
+      titleKey: 'arrivals.item1.title',
+      descriptionKey: 'arrivals.item1.description',
+      image: '/fashion-autumn-collection-designer.jpg',
+      badgeKey: 'arrivals.trending',
+    },
+    {
+      id: 2,
+      titleKey: 'arrivals.item2.title',
+      descriptionKey: 'arrivals.item2.description',
+      image: '/fashion-accessories-bags-shoes.jpg',
+      badgeKey: 'arrivals.accessories',
+    },
+  ]
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -40,7 +42,7 @@ export default function NewArrivals() {
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-16 text-center">
-          Dernières Arrivées
+          {t('sections.newArrivals')}
         </h2>
 
         <div className="space-y-12">
@@ -56,23 +58,23 @@ export default function NewArrivals() {
               <div className="flex-1 relative overflow-hidden aspect-video">
                 <img
                   src={arrival.image || "/placeholder.svg"}
-                  alt={arrival.title}
+                  alt={t(arrival.titleKey)}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-6 left-6 bg-foreground text-background px-4 py-2 font-bold text-sm tracking-widest">
-                  {arrival.badge}
+                  {t(arrival.badgeKey)}
                 </div>
               </div>
 
               <div className="flex-1">
                 <h3 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-                  {arrival.title}
+                  {t(arrival.titleKey)}
                 </h3>
                 <p className="text-lg text-muted-foreground font-light mb-6">
-                  {arrival.description}
+                  {t(arrival.descriptionKey)}
                 </p>
                 <button className="px-6 py-3 bg-foreground text-background font-semibold hover:opacity-80 transition">
-                  Découvrir
+                  {t('arrivals.discover')}
                 </button>
               </div>
             </div>
