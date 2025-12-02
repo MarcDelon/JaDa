@@ -6,8 +6,11 @@ import Footer from "@/components/footer"
 import { Heart } from "lucide-react"
 import Link from "next/link"
 import { supabase } from "@/lib/supabaseClient"
+import { useLanguage } from "@/lib/language-context"
+import { formatPrice } from "@/lib/currency"
 
 export default function EnfantCollectionPage() {
+  const { t } = useLanguage()
   const [kidsProducts, setKidsProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [sortBy, setSortBy] = useState("newest")
@@ -31,7 +34,7 @@ export default function EnfantCollectionPage() {
       const formattedProducts = data.map(product => ({
         id: product.id,
         name: product.name,
-        price: `${product.price.toFixed(2).replace('.', ',')} €`,
+        price: product.price,
         image: product.image_url || product.image || `/placeholder-product-${product.id}.jpg`,
         age: product.age || "2-14"
       }))
@@ -50,8 +53,8 @@ export default function EnfantCollectionPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Enfant</h1>
-          <p className="text-muted-foreground text-lg">Vêtements pour enfants (2-14 ans) et bébés</p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('collections.children.title')}</h1>
+          <p className="text-muted-foreground text-lg">{t('collections.children.description')}</p>
         </div>
 
         {/* Subcategories */}
@@ -60,43 +63,43 @@ export default function EnfantCollectionPage() {
             href="/collections/enfant/kids"
             className="p-4 border border-border hover:bg-secondary transition text-center font-medium"
           >
-            Enfant (2-14 ans)
+            {t('nav.kids')}
           </Link>
           <Link
             href="/collections/enfant/baby"
             className="p-4 border border-border hover:bg-secondary transition text-center font-medium"
           >
-            Bébé (0-36 mois)
+            {t('nav.baby')}
           </Link>
           <Link
             href="/collections/enfant/teens"
             className="p-4 border border-border hover:bg-secondary transition text-center font-medium"
           >
-            Ado (12-18 ans)
+            {t('nav.teens')}
           </Link>
         </div>
 
         <div className="mb-8 flex justify-between items-center">
-          <div className="text-sm text-muted-foreground">{kidsProducts.length} articles</div>
+          <div className="text-sm text-muted-foreground">{kidsProducts.length} {t('collections.itemsAvailable')}</div>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
             className="text-sm border border-border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent"
           >
-            <option value="newest">Nouveautés</option>
-            <option value="price-asc">Prix: bas à haut</option>
-            <option value="price-desc">Prix: haut à bas</option>
+            <option value="newest">{t('collections.newest')}</option>
+            <option value="price-asc">{t('collections.priceAsc')}</option>
+            <option value="price-desc">{t('collections.priceDesc')}</option>
           </select>
         </div>
 
         {loading ? (
           <div className="text-center py-20">
-            <p className="text-lg text-muted-foreground">Chargement des produits...</p>
+            <p className="text-lg text-muted-foreground">{t('common.loading')}</p>
           </div>
         ) : kidsProducts.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-2xl font-semibold mb-2">Aucun produit disponible</p>
-            <p className="text-muted-foreground">Aucun produit enfant disponible pour le moment</p>
+            <p className="text-2xl font-semibold mb-2">{t('products.noProducts')}</p>
+            <p className="text-muted-foreground">{t('products.noProducts')}</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -123,7 +126,7 @@ export default function EnfantCollectionPage() {
                 </button>
               </div>
               <h3 className="text-sm font-medium text-foreground line-clamp-2">{product.name}</h3>
-              <p className="text-sm font-semibold text-foreground mt-2">{product.price}</p>
+              <p className="text-sm font-semibold text-foreground mt-2">{formatPrice(product.price)}</p>
             </Link>
           ))}
         </div>
