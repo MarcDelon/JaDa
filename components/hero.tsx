@@ -2,30 +2,32 @@
 
 import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-
-const slides = [
-  {
-    id: 1,
-    title: 'Novembre Soldes',
-    subtitle: 'Découvrez notre collection exclusive',
-    image: '/fashion-woman-autumn-collection.jpg',
-  },
-  {
-    id: 2,
-    title: 'Nouvelles Tendances',
-    subtitle: 'Les meilleures pièces de la saison',
-    image: '/modern-fashion-minimal-style.jpg',
-  },
-  {
-    id: 3,
-    title: 'Collection Enfant',
-    subtitle: 'Style et confort pour les plus jeunes',
-    image: '/kids-fashion-colorful-clothes.jpg',
-  },
-]
+import { useLanguage } from '@/lib/language-context'
 
 export default function Hero() {
+  const { t } = useLanguage()
   const [current, setCurrent] = useState(0)
+  
+  const slides = [
+    {
+      id: 1,
+      titleKey: 'hero.slide1.title',
+      subtitleKey: 'hero.slide1.subtitle',
+      image: '/fashion-woman-autumn-collection.jpg',
+    },
+    {
+      id: 2,
+      titleKey: 'hero.slide2.title',
+      subtitleKey: 'hero.slide2.subtitle',
+      image: '/modern-fashion-minimal-style.jpg',
+    },
+    {
+      id: 3,
+      titleKey: 'hero.slide3.title',
+      subtitleKey: 'hero.slide3.subtitle',
+      image: '/kids-fashion-colorful-clothes.jpg',
+    },
+  ]
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -49,16 +51,16 @@ export default function Hero() {
         >
           <img
             src={slide.image || "/placeholder.svg"}
-            alt={slide.title}
+            alt={t(slide.titleKey)}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
             <div className="text-center text-white">
               <h1 className="text-4xl md:text-6xl font-bold tracking-wide mb-4 text-balance">
-                {slide.title}
+                {t(slide.titleKey)}
               </h1>
               <p className="text-lg md:text-xl font-light">
-                {slide.subtitle}
+                {t(slide.subtitleKey)}
               </p>
             </div>
           </div>

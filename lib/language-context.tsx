@@ -93,6 +93,38 @@ const translations = {
     'products.noProducts': 'Aucun produit disponible',
     'products.newArrivals': 'Nouveautés',
     'products.onSale': 'En solde',
+    
+    // Hero
+    'hero.slide1.title': 'Novembre Soldes',
+    'hero.slide1.subtitle': 'Découvrez notre collection exclusive',
+    'hero.slide2.title': 'Nouvelles Tendances',
+    'hero.slide2.subtitle': 'Les meilleures pièces de la saison',
+    'hero.slide3.title': 'Collection Enfant',
+    'hero.slide3.subtitle': 'Style et confort pour les plus jeunes',
+    
+    // Sections
+    'sections.featured': 'Produits en vedette',
+    'sections.newArrivals': 'Nouveautés',
+    'sections.viewAll': 'Voir tout',
+    
+    // Newsletter
+    'newsletter.title': 'Restez informé',
+    'newsletter.subtitle': 'Inscrivez-vous à notre newsletter pour recevoir nos dernières offres',
+    'newsletter.email': 'Votre adresse e-mail',
+    'newsletter.subscribe': "S'inscrire",
+    
+    // Footer
+    'footer.shop': 'Boutique',
+    'footer.about': 'À propos',
+    'footer.contact': 'Contact',
+    'footer.help': 'Aide',
+    'footer.shipping': 'Livraison',
+    'footer.returns': 'Retours',
+    'footer.faq': 'FAQ',
+    'footer.terms': "Conditions d'utilisation",
+    'footer.privacy': 'Politique de confidentialité',
+    'footer.follow': 'Suivez-nous',
+    'footer.copyright': '© 2024 JaDa. Tous droits réservés.',
   },
   en: {
     // Navigation
@@ -176,6 +208,38 @@ const translations = {
     'products.noProducts': 'No products available',
     'products.newArrivals': 'New Arrivals',
     'products.onSale': 'On Sale',
+    
+    // Hero
+    'hero.slide1.title': 'November Sale',
+    'hero.slide1.subtitle': 'Discover our exclusive collection',
+    'hero.slide2.title': 'New Trends',
+    'hero.slide2.subtitle': 'The best pieces of the season',
+    'hero.slide3.title': 'Kids Collection',
+    'hero.slide3.subtitle': 'Style and comfort for the little ones',
+    
+    // Sections
+    'sections.featured': 'Featured Products',
+    'sections.newArrivals': 'New Arrivals',
+    'sections.viewAll': 'View All',
+    
+    // Newsletter
+    'newsletter.title': 'Stay Informed',
+    'newsletter.subtitle': 'Subscribe to our newsletter to receive our latest offers',
+    'newsletter.email': 'Your email address',
+    'newsletter.subscribe': 'Subscribe',
+    
+    // Footer
+    'footer.shop': 'Shop',
+    'footer.about': 'About',
+    'footer.contact': 'Contact',
+    'footer.help': 'Help',
+    'footer.shipping': 'Shipping',
+    'footer.returns': 'Returns',
+    'footer.faq': 'FAQ',
+    'footer.terms': 'Terms of Service',
+    'footer.privacy': 'Privacy Policy',
+    'footer.follow': 'Follow Us',
+    'footer.copyright': '© 2024 JaDa. All rights reserved.',
   }
 }
 

@@ -11,7 +11,7 @@ interface FeaturedProductsProps {
   category?: string
 }
 
-export default function FeaturedProducts({ category = 'Collection Printemps-Été' }: FeaturedProductsProps) {
+export default function FeaturedProducts({ category }: FeaturedProductsProps) {
   const { t } = useLanguage()
   const [products, setProducts] = useState<any[]>([])
   const [hoveredId, setHoveredId] = useState<number | null>(null)
@@ -91,24 +91,22 @@ export default function FeaturedProducts({ category = 'Collection Printemps-Ét�
       <div className="max-w-7xl mx-auto">
         <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            {category}
+            {category || t('sections.featured')}
           </h2>
           <p className="text-lg text-muted-foreground font-light">
-            Découvrez les nouvelles pièces essentielles pour une garde-robe moderne
+            {t('hero.slide1.subtitle')}
           </p>
         </div>
 
         {loading ? (
           <div className="text-center py-20">
-            <p className="text-lg text-muted-foreground">Chargement des produits...</p>
+            <p className="text-lg text-muted-foreground">{t('common.loading')}</p>
           </div>
         ) : products.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-2xl font-semibold mb-2">Aucun produit disponible</p>
+            <p className="text-2xl font-semibold mb-2">{t('products.noProducts')}</p>
             <p className="text-muted-foreground">
-              {category === 'T-shirts' 
-                ? 'Aucun t-shirt disponible pour le moment' 
-                : `Aucun produit disponible dans cette catégorie pour le moment`}
+              {t('products.noProducts')}
             </p>
           </div>
         ) : (
