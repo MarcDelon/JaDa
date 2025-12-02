@@ -176,6 +176,7 @@ const translations = {
     'auth.hasAccount': 'Déjà un compte ?',
     'auth.loginWithGoogle': 'Se connecter avec Google',
     'auth.or': 'ou',
+    'auth.rememberMe': 'Se souvenir de moi',
   },
   en: {
     // Navigation
@@ -342,6 +343,7 @@ const translations = {
     'auth.hasAccount': 'Already have an account?',
     'auth.loginWithGoogle': 'Continue with Google',
     'auth.or': 'or',
+    'auth.rememberMe': 'Remember me',
   }
 }
 

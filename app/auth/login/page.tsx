@@ -8,8 +8,10 @@ import { useRouter } from "next/navigation"
 import Navigation from "@/components/navigation"
 import { Mail, Lock, Eye, EyeOff } from "lucide-react"
 import { supabase } from "@/lib/supabaseClient"
+import { useLanguage } from "@/lib/language-context"
 
 export default function LoginPage() {
+  const { t } = useLanguage()
   const router = useRouter()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -57,8 +59,8 @@ export default function LoginPage() {
       <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4">
         <div className="w-full max-w-md">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-2">Se connecter</h1>
-            <p className="text-muted-foreground">Accédez à votre compte JaDa</p>
+            <h1 className="text-4xl font-bold mb-2">{t('auth.login')}</h1>
+            <p className="text-muted-foreground">JaDa</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -71,7 +73,7 @@ export default function LoginPage() {
 
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium mb-2">Adresse e-mail</label>
+              <label className="block text-sm font-medium mb-2">{t('auth.email')}</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3.5 text-muted-foreground" size={20} />
                 <input
@@ -87,7 +89,7 @@ export default function LoginPage() {
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium mb-2">Mot de passe</label>
+              <label className="block text-sm font-medium mb-2">{t('auth.password')}</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3.5 text-muted-foreground" size={20} />
                 <input
@@ -117,10 +119,10 @@ export default function LoginPage() {
                   onChange={(e) => setRememberMe(e.target.checked)}
                   className="w-4 h-4"
                 />
-                <span>Se souvenir de moi</span>
+                <span>{t('auth.rememberMe')}</span>
               </label>
               <Link href="/auth/forgot-password" className="text-accent hover:underline">
-                Mot de passe oublié ?
+                {t('auth.forgotPassword')}
               </Link>
             </div>
 
@@ -130,7 +132,7 @@ export default function LoginPage() {
               disabled={loading}
               className="w-full py-3 bg-foreground text-background font-bold hover:opacity-90 transition disabled:opacity-50"
             >
-              {loading ? 'Connexion...' : 'Se connecter'}
+              {loading ? `${t('common.loading')}...` : t('auth.loginButton')}
             </button>
           </form>
 
@@ -140,7 +142,7 @@ export default function LoginPage() {
               <div className="w-full border-t border-border"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-background text-muted-foreground">Ou</span>
+              <span className="px-2 bg-background text-muted-foreground">{t('auth.or')}</span>
             </div>
           </div>
 
@@ -151,16 +153,16 @@ export default function LoginPage() {
               onClick={handleGoogleLogin}
               className="w-full py-3 border border-border hover:bg-secondary transition font-medium"
             >
-              Se connecter avec Google
+              {t('auth.loginWithGoogle')}
             </button>
           </div>
 
           {/* Sign Up Link */}
           <div className="mt-8 text-center">
             <p className="text-muted-foreground">
-              Pas encore de compte ?{" "}
+              {t('auth.noAccount')}{" "}
               <Link href="/auth/register" className="text-accent font-bold hover:underline">
-                S'inscrire
+                {t('auth.register')}
               </Link>
             </p>
           </div>
