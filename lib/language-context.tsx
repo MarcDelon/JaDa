@@ -143,6 +143,9 @@ const translations = {
     'collections.children.description': 'Mode confortable et tendance pour les enfants',
     'collections.sale.title': 'Soldes',
     'collections.sale.description': 'Profitez de nos meilleures offres',
+    'collections.shoes.title': 'Chaussures Femme',
+    'collections.clothing.title': 'Vêtements Femme',
+    'collections.accessories.title': 'Accessoires Femme',
     'collections.sortBy': 'Trier par',
     'collections.newest': 'Plus récent',
     'collections.priceAsc': 'Prix croissant',
@@ -150,6 +153,13 @@ const translations = {
     'collections.filters': 'Filtres',
     'collections.showFilters': 'Afficher les filtres',
     'collections.hideFilters': 'Masquer les filtres',
+    'collections.itemsAvailable': 'articles disponibles',
+    
+    // Filters
+    'filters.color': 'Couleur',
+    'filters.type': 'Type',
+    'filters.price': 'Prix',
+    'filters.noMatch': 'Aucun produit ne correspond à vos critères',
   },
   en: {
     // Navigation
@@ -283,6 +293,9 @@ const translations = {
     'collections.children.description': 'Comfortable and trendy fashion for kids',
     'collections.sale.title': 'Sale',
     'collections.sale.description': 'Enjoy our best offers',
+    'collections.shoes.title': "Women's Shoes",
+    'collections.clothing.title': "Women's Clothing",
+    'collections.accessories.title': "Women's Accessories",
     'collections.sortBy': 'Sort by',
     'collections.newest': 'Newest',
     'collections.priceAsc': 'Price: Low to High',
@@ -290,6 +303,13 @@ const translations = {
     'collections.filters': 'Filters',
     'collections.showFilters': 'Show Filters',
     'collections.hideFilters': 'Hide Filters',
+    'collections.itemsAvailable': 'items available',
+    
+    // Filters
+    'filters.color': 'Color',
+    'filters.type': 'Type',
+    'filters.price': 'Price',
+    'filters.noMatch': 'No products match your criteria',
   }
 }
 

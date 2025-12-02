@@ -6,15 +6,18 @@ import Link from "next/link"
 import { Heart } from "lucide-react"
 import { useState, useMemo, useEffect } from "react"
 import { supabase } from "@/lib/supabaseClient"
+import { useLanguage } from "@/lib/language-context"
+import { formatPrice } from "@/lib/currency"
 
 export default function ClothingPage() {
+  const { t } = useLanguage()
   const [clothingProducts, setClothingProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [liked, setLiked] = useState<number[]>([])
   const [sortBy, setSortBy] = useState("newest")
   const [selectedColors, setSelectedColors] = useState<string[]>([])
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
-  const [priceRange, setPriceRange] = useState([0, 200])
+  const [priceRange, setPriceRange] = useState([0, 130000])
 
   useEffect(() => {
     fetchClothingProducts()
@@ -109,16 +112,16 @@ export default function ClothingPage() {
                   onChange={(e) => setSortBy(e.target.value)}
                   className="w-full px-3 py-2 border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent"
                 >
-                  <option value="newest">Plus récent</option>
-                  <option value="price-low">Prix: Bas à haut</option>
-                  <option value="price-high">Prix: Haut à bas</option>
-                  <option value="name">Nom A-Z</option>
+                  <option value="newest">{t('collections.newest')}</option>
+                  <option value="price-low">{t('collections.priceAsc')}</option>
+                  <option value="price-high">{t('collections.priceDesc')}</option>
+                  <option value="name">A-Z</option>
                 </select>
               </div>
 
               {/* Colors */}
               <div>
-                <h3 className="text-sm font-bold uppercase mb-4">Couleur</h3>
+                <h3 className="text-sm font-bold uppercase mb-4">{t('filters.color')}</h3>
                 <div className="space-y-2">
                   {colors.map((color) => (
                     <label key={color} className="flex items-center space-x-2 cursor-pointer">
@@ -136,7 +139,7 @@ export default function ClothingPage() {
 
               {/* Categories */}
               <div>
-                <h3 className="text-sm font-bold uppercase mb-4">Type</h3>
+                <h3 className="text-sm font-bold uppercase mb-4">{t('filters.type')}</h3>
                 <div className="space-y-2">
                   {categories.map((cat) => (
                     <label key={cat} className="flex items-center space-x-2 cursor-pointer">
@@ -154,18 +157,19 @@ export default function ClothingPage() {
 
               {/* Price */}
               <div>
-                <h3 className="text-sm font-bold uppercase mb-4">Prix</h3>
+                <h3 className="text-sm font-bold uppercase mb-4">{t('filters.price')}</h3>
                 <div className="space-y-3">
                   <input
                     type="range"
                     min="0"
-                    max="200"
+                    max="130000"
+                    step="1000"
                     value={priceRange[1]}
                     onChange={(e) => setPriceRange([priceRange[0], Number.parseInt(e.target.value)])}
                     className="w-full"
                   />
                   <div className="text-sm text-foreground">
-                    {priceRange[0]}€ - {priceRange[1]}€
+                    {formatPrice(priceRange[0])} - {formatPrice(priceRange[1])}
                   </div>
                 </div>
               </div>
@@ -175,13 +179,13 @@ export default function ClothingPage() {
           {/* Products Grid */}
           <div className="md:col-span-3">
             <div className="mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">Vêtements Femme</h1>
-              <p className="text-muted-foreground text-lg">{sortedProducts.length} articles disponibles</p>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('collections.clothing.title')}</h1>
+              <p className="text-muted-foreground text-lg">{sortedProducts.length} {t('collections.itemsAvailable')}</p>
             </div>
 
             {loading ? (
               <div className="text-center py-20">
-                <p className="text-lg text-muted-foreground">Chargement des vêtements...</p>
+                <p className="text-lg text-muted-foreground">{t('common.loading')}</p>
               </div>
             ) : sortedProducts.length > 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
@@ -208,7 +212,7 @@ export default function ClothingPage() {
                       </button>
                     </div>
                     <h3 className="text-sm font-medium text-foreground line-clamp-2">{product.name}</h3>
-                    <p className="text-sm font-semibold text-foreground mt-2">{product.price.toFixed(2)}€</p>
+                    <p className="text-sm font-semibold text-foreground mt-2">{formatPrice(product.price)}</p>
                   </Link>
                 ))}
               </div>
