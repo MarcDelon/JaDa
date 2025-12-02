@@ -160,6 +160,22 @@ const translations = {
     'filters.type': 'Type',
     'filters.price': 'Prix',
     'filters.noMatch': 'Aucun produit ne correspond à vos critères',
+    
+    // Auth
+    'auth.login': 'Connexion',
+    'auth.register': "S'inscrire",
+    'auth.email': 'E-mail',
+    'auth.password': 'Mot de passe',
+    'auth.confirmPassword': 'Confirmer le mot de passe',
+    'auth.firstName': 'Prénom',
+    'auth.lastName': 'Nom',
+    'auth.loginButton': 'Se connecter',
+    'auth.registerButton': "Créer un compte",
+    'auth.forgotPassword': 'Mot de passe oublié ?',
+    'auth.noAccount': "Pas de compte ?",
+    'auth.hasAccount': 'Déjà un compte ?',
+    'auth.loginWithGoogle': 'Se connecter avec Google',
+    'auth.or': 'ou',
   },
   en: {
     // Navigation
@@ -310,6 +326,22 @@ const translations = {
     'filters.type': 'Type',
     'filters.price': 'Price',
     'filters.noMatch': 'No products match your criteria',
+    
+    // Auth
+    'auth.login': 'Login',
+    'auth.register': 'Sign Up',
+    'auth.email': 'Email',
+    'auth.password': 'Password',
+    'auth.confirmPassword': 'Confirm Password',
+    'auth.firstName': 'First Name',
+    'auth.lastName': 'Last Name',
+    'auth.loginButton': 'Log In',
+    'auth.registerButton': 'Create Account',
+    'auth.forgotPassword': 'Forgot password?',
+    'auth.noAccount': "Don't have an account?",
+    'auth.hasAccount': 'Already have an account?',
+    'auth.loginWithGoogle': 'Continue with Google',
+    'auth.or': 'or',
   }
 }
 
