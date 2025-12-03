@@ -3,7 +3,7 @@
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import Link from "next/link"
-import { Heart } from "lucide-react"
+import { Heart, Filter } from "lucide-react"
 import { useState, useMemo, useEffect } from "react"
 import { supabase } from "@/lib/supabaseClient"
 import { useLanguage } from "@/lib/language-context"
@@ -18,6 +18,7 @@ export default function ShoesPage() {
   const [selectedColors, setSelectedColors] = useState<string[]>([])
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [priceRange, setPriceRange] = useState([0, 130000])
+  const [showMobileFilters, setShowMobileFilters] = useState(false)
 
   useEffect(() => {
     fetchShoes()
@@ -100,10 +101,19 @@ export default function ShoesPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Mobile Filter Toggle */}
+        <button
+          onClick={() => setShowMobileFilters(!showMobileFilters)}
+          className="md:hidden w-full mb-4 px-4 py-3 border border-border bg-background hover:bg-secondary transition flex items-center justify-between"
+        >
+          <span className="font-medium">{t('collections.filters')}</span>
+          <Filter size={20} />
+        </button>
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Sidebar Filters */}
-          <div className="md:col-span-1">
-            <div className="sticky top-24 space-y-8">
+          <div className={`md:col-span-1 ${showMobileFilters ? 'block' : 'hidden md:block'}`}>
+            <div className="md:sticky md:top-24 space-y-8 bg-background md:bg-transparent p-4 md:p-0 border md:border-0 border-border">
               <div>
                 <h3 className="text-sm font-bold uppercase mb-4">Trier par</h3>
                 <select
